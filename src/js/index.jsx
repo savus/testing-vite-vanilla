@@ -1,24 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
   const active = "active";
-  const navLink = "[data-navlink]";
-  const navbarLinks = document.querySelectorAll(`${navLink}`);
+  const isVisible = "is-visible";
+  const dataNavLink = "[data-navlink]";
+  const nav = "nav-links";
 
-  const formClass = "input-form";
-  const inputForm = document.querySelector(`.${formClass}`);
+  const navLinks = document.querySelector(`.${nav}`);
 
   const setActive = (selector, elem) => {
-    const selected = document.querySelector(`${selector}.${active}`);
-    if (selected !== null) selected.classList.remove(active);
+    const activeSelected = document.querySelector(`${selector}.${active}`);
+    if (activeSelected !== null) activeSelected.classList.remove(active);
     elem.classList.add(active);
   };
 
-  navbarLinks.forEach((link) => {
-    link.addEventListener("click", function ({ target }) {
-      setActive(`${navLink}.active`, target);
-      const linkElement = document.querySelector(`#${target.dataset.navlink}`);
-      if (linkElement.classList.contains("is-visible"))
-        linkElement.classList.remove("is-visible");
-      else linkElement.classList.add("is-visible");
-    });
+  navLinks.addEventListener("click", function ({ target }) {
+    const isLink = target.dataset.navlink !== null;
+    if (isLink) {
+      setActive(dataNavLink, target);
+      document
+        .getElementById(`${target.dataset.navlink}`)
+        .classList.add("is-visible");
+    }
   });
 });
