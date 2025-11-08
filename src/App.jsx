@@ -2,9 +2,11 @@ import { Header } from "./components/Header";
 import { CountSection } from "./components/CountSection";
 import { Carousel } from "./components/Carousel";
 
-import "/src/css/app.css";
 import { ControlledForm } from "./components/ControlledForm";
 import { ClassControlledForm } from "./components/ClassControlledForm";
+import { InputForm } from "./components/InputForm";
+import "/src/css/app.css";
+import "/src/js/index.jsx";
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
       {/* <Header></Header>
       <CountSection></CountSection>
       <Carousel></Carousel> */}
-      <ClassControlledForm />
+      {/* <ClassControlledForm /> */}
+      <Header />
+      <InputForm />
     </>
   );
 }
