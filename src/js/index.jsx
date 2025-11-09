@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const formClose = document.querySelectorAll(`.${closeButton}`);
 
+  const usernameInput = document.querySelector("#username");
+  let userInput = "";
+  const setUserInput = (input) => (userInput = input);
+  const updateUserInput = () => {
+    document
+      .querySelectorAll(".first-name-input")
+      .forEach((input) => (input.innerText = userInput));
+  };
+
   navLinkElem.addEventListener("click", ({ target }) => {
     const isLink = target.matches(dataNavLink);
     if (isLink) {
@@ -23,6 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const form = target.closest(`.${overlay}`);
       form.classList.remove(isVisible);
     });
+  });
+
+  usernameInput.addEventListener("keyup", (e) => {
+    setUserInput(e.target.value);
+    console.log(userInput);
+    updateUserInput();
   });
 
   document.addEventListener("keyup", (e) => {
