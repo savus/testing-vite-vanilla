@@ -1,24 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const active = "active";
   const isVisible = "is-visible";
+  const active = "active";
   const dataNavLink = "[data-navlink]";
-  const nav = "nav-links";
+  const navLinks = "nav-links";
+  const closeButton = "close-button";
+  const overlay = "modal-overlay";
 
-  const navLinks = document.querySelector(`.${nav}`);
+  const navLinkElem = document.querySelector(`.${navLinks}`);
 
-  const setActive = (selector, elem) => {
-    const activeSelected = document.querySelector(`${selector}.${active}`);
-    if (activeSelected !== null) activeSelected.classList.remove(active);
-    elem.classList.add(active);
-  };
+  const formClose = document.querySelectorAll(`.${closeButton}`);
 
-  navLinks.addEventListener("click", function ({ target }) {
-    const isLink = target.dataset.navlink !== null;
+  navLinkElem.addEventListener("click", ({ target }) => {
+    const isLink = target.matches(dataNavLink);
     if (isLink) {
-      setActive(dataNavLink, target);
-      document
-        .getElementById(`${target.dataset.navlink}`)
-        .classList.add("is-visible");
+      const dataLink = target.dataset.navlink;
+      document.getElementById(dataLink).classList.add(isVisible);
+    }
+  });
+
+  formClose.forEach((button) => {
+    button.addEventListener("click", ({ target }) => {
+      const form = target.closest(`.${overlay}`);
+      form.classList.remove(isVisible);
+    });
+  });
+
+  document.addEventListener("keyup", (e) => {
+    const key = e.key;
+
+    switch (key) {
+      case "Enter":
+        if (form.classList.contains("is-visible"))
+          form.classList.remove("is-visible");
+        else form.classList.add("is-visible");
+        break;
     }
   });
 });

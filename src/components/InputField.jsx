@@ -4,12 +4,7 @@ export const InputField = ({ label }) => {
       <label htmlFor={label} name={label}>
         {label.toUpperCase()}:
       </label>
-      <input
-        type="text"
-        value=""
-        placeholder={`Type ${label} here.`}
-        id={label}
-      />
+      <input type="text" placeholder={`Type ${label} here.`} id={label} />
     </div>
   );
 };

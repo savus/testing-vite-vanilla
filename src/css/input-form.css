@@ -1,13 +1,53 @@
-.input-form {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
+.js-form {
+  --opacity: 0;
+  --visibility: visible;
+  --top: 10%;
+  background-color: var(--bg-form);
+  padding: 1rem;
+  border-radius: var(--size-5);
+  max-width: 600px;
+  width: 600px;
+  border: 1px solid #fff;
+  box-shadow: inset 0px 2px 40px rgba(0, 0, 0, 0.2);
+  max-height: 400px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease-in-out 0.3s, top 0.3s ease-in-out 0.3s,
+    visibility 0.3s ease-in-out 0.3s;
+  top: var(--top);
+  opacity: var(--opacity);
+  visibility: var(--visibility);
 }
 
-.input-form.is-visible {
-  display: block;
+.is-visible .js-form {
+  --top: 20%;
+  --visibilty: visible;
+  --opacity: 1;
+}
+
+.js-form .input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-8);
+}
+
+.js-form .close-button {
+  --scale: 1;
+  position: absolute;
+  right: 5%;
+  transition: transform 0.2s ease-in;
+  transform: scale(1);
+  font-size: var(--size-20);
+}
+
+.js-form .close-button:hover {
+  transform: scale(2);
+  cursor: pointer;
+}
+
+.js-form .input-field input {
+  max-width: var(--size-320);
+  padding: var(--size-12);
+  border-radius: var(--size-12);
 }
