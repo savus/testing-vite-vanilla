@@ -1,11 +1,11 @@
-export const InputField = ({ label }) => {
+export const InputField = ({ label, id, placeholder }) => {
   return (
-    <div className="input-field" id="username">
+    <div className="input-field" id={id}>
       <label htmlFor={label} name={label}>
-        {label.toUpperCase()}:{" "}
+        {label.toUpperCase()}:
         <span className={`${label.replaceAll(" ", "-")}-input`}></span>
       </label>
-      <input type="text" placeholder={`Type ${label} here.`} id={label} />
+      <input type="text" placeholder={placeholder} id={label} />
     </div>
   );
 };

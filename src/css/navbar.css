@@ -1,18 +1,23 @@
-.navbar ul {
+.navbar ul,
+.navbar-react ul {
   display: flex;
 }
 
-.navbar ul li {
+.navbar ul li,
+.navbar-react ul li {
   padding: 1rem;
   margin-right: 0.8rem;
   text-transform: uppercase;
 }
 
 .navbar ul li:hover,
-.navbar ul li.active {
+.navbar ul li.active,
+.navbar-react ul li:hover,
+.navbar-react ul li.active {
   color: var(--color-link);
 }
 
-.navbar ul li:hover {
+.navbar ul li:hover,
+.navbar-react ul li:hover {
   cursor: pointer;
 }

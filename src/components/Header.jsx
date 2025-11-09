@@ -1,4 +1,5 @@
 import { Navbar } from "./Navbar";
+import { NavbarReact } from "./NavbarReact";
 import "../css/header.css";
 
 export const Header = () => {
@@ -6,6 +7,7 @@ export const Header = () => {
     <header>
       <h1>folio</h1>
       <Navbar />
+      <NavbarReact />
     </header>
   );
 };

@@ -10,34 +10,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const formClose = document.querySelectorAll(`.${closeButton}`);
 
-  const usernameInput = document.querySelector("#username");
-  let userInput = "";
-  const setUserInput = (input) => (userInput = input);
-  const updateUserInput = () => {
-    document
-      .querySelectorAll(".first-name-input")
-      .forEach((input) => (input.innerText = userInput));
+  const setActive = (selector, elem) => {
+    const activeSelected = document.querySelector(`${selector}.${active}`);
+    if (activeSelected !== null) activeSelected.classList.remove(active);
+    elem.classList.add(active);
   };
 
-  navLinkElem.addEventListener("click", ({ target }) => {
+  const firstNameInput = document.querySelector("#first-name");
+  let firstName = "";
+  const setFirstName = (input) => (firstName = input);
+  const updateFirstName = () =>
+    document
+      .querySelectorAll(".first-name-input")
+      .forEach((input) => (input.innerText = firstName));
+
+  const delegateNavLinks = (e) => {
+    const { target } = e;
     const isLink = target.matches(dataNavLink);
     if (isLink) {
       const dataLink = target.dataset.navlink;
+
+      setActive(dataNavLink, target);
       document.getElementById(dataLink).classList.add(isVisible);
     }
-  });
+  };
+
+  const closeModal = (e) => {
+    const form = e.target.closest(`.${overlay}`);
+    form.classList.remove(isVisible);
+  };
+
+  navLinkElem.addEventListener("click", delegateNavLinks);
 
   formClose.forEach((button) => {
-    button.addEventListener("click", ({ target }) => {
-      const form = target.closest(`.${overlay}`);
-      form.classList.remove(isVisible);
-    });
+    button.addEventListener("click", closeModal);
   });
 
-  usernameInput.addEventListener("keyup", (e) => {
-    setUserInput(e.target.value);
-    console.log(userInput);
-    updateUserInput();
+  firstNameInput.addEventListener("keyup", (e) => {
+    setFirstName(e.target.value);
+    updateFirstName();
   });
 
   document.addEventListener("keyup", (e) => {
@@ -45,9 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     switch (key) {
       case "Enter":
-        if (form.classList.contains("is-visible"))
-          form.classList.remove("is-visible");
-        else form.classList.add("is-visible");
         break;
     }
   });

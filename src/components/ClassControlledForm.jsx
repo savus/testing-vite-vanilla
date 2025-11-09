@@ -1,57 +1,56 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 
-export class ClassControlledForm extends Component {
-  state = {
-    firstName: "",
-    lastName: "",
+export const ClassControlledForm = ({ handleUserInformation }) => {
+  const [firstNameInput, setFirstNameInput] = useState("");
+  const [lastNameInput, setLastNameInput] = useState("");
+
+  const resetFormValues = () => {
+    setFirstNameInput("");
+    setLastNameInput("");
   };
 
-  render() {
-    const { firstName, lastName } = this.state;
-
-    const resetFormValues = () => {
-      this.setState({ firstName: "" });
-      this.setState({ lastName: "" });
-    };
-    return (
-      <>
-        <div className="controlled-form">
-          <form
-            action="#"
-            onSubmit={(e) => {
-              e.preventDefault();
-              console.log(firstName, lastName);
-              resetFormValues();
-            }}
-          >
-            <div>
-              <label htmlFor="first-name" value={firstName}>
-                First Name:
-              </label>
-              <input
-                type="text"
-                name="first-name"
-                value={firstName}
-                onChange={({ target: { value } }) => {
-                  this.setState({ firstName: value });
-                }}
-              />
-            </div>
-            <div>
-              <label htmlFor="last-name">Last Name:</label>
-              <input
-                type="text"
-                name="last-name"
-                value={lastName}
-                onChange={({ target: { value } }) => {
-                  this.setState({ lastName: value });
-                }}
-              />
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div>{firstNameInput}</div>
+      <div className="controlled-form">
+        <form
+          action="#"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleUserInformation({
+              firstName: firstNameInput,
+              lastName: lastNameInput,
+            });
+            resetFormValues();
+          }}
+        >
+          <div>
+            <label htmlFor="first-name" value={firstNameInput}>
+              First Name:
+            </label>
+            <input
+              type="text"
+              name="first-name"
+              value={firstNameInput}
+              onChange={({ target: { value } }) => {
+                setFirstNameInput(value);
+              }}
+            />
+          </div>
+          <div>
+            <label htmlFor="last-name">Last Name:</label>
+            <input
+              type="text"
+              name="last-name"
+              value={lastNameInput}
+              onChange={({ target: { value } }) => {
+                setLastNameInput(value);
+              }}
+            />
+          </div>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </>
+  );
+};
